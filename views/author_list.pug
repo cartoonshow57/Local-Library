@@ -5,6 +5,7 @@ block content
 
     ul
         each author in author_list
+            if author in author_list
             li
                 a(href=author.url) #{author.name}
                 |    (#{author.author_birth_date_formatted} - #{author.author_death_date_formatted})
