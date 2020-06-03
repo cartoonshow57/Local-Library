@@ -1,7 +1,19 @@
 var Genre = require('../models/genre');
 
-exports.genre_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre list');
+exports.genre_list = function(req, res, next) {
+    Genre.find()
+        .populate('genre')
+        .sort([['name', 'ascending']])
+        .exec(function(err, list_genres) {
+            if (err) {return next(err);}
+            array = [];
+            for (i in list_genres) {
+                if (i % 2 == 0) {
+                    array.push(list_genres[i]);
+                }
+            }
+            res.render('genre_list', {title: "Genre List", list_genres: array});
+        });
 };
 
 exports.genre_detail = function(req, res) {
