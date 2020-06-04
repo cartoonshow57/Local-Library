@@ -7,11 +7,15 @@ exports.genre_list = function(req, res, next) {
         .exec(function(err, list_genres) {
             if (err) {return next(err);}
             array = [];
-            for (i in list_genres) {
-                if (i % 2 == 0) {
-                    array.push(list_genres[i]);
+            a = new Set();
+            for (var object in list_genres) {
+                if (a.has(list_genres[object].name)) {
+                    array.push(list_genres[object]);
+                    a.add(list_genres[object].name);
+                } else {
+                    a.add(list_genres[object].name);
                 }
-            }
+            }    
             res.render('genre_list', {title: "Genre List", list_genres: array});
         });
 };
