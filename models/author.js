@@ -23,8 +23,20 @@ authorSchema.virtual('name').get(function() {
     return fullname;
 });
 
-authorSchema.virtual('lifespan').get(function() {
+authorSchema.virtual('url').get(function() {
     return '/catalog/author/' + this._id;
+});
+
+authorSchema.virtual('lifespan').get(function() {
+    var lifetime = '';
+    if (this.date_of_birth) {
+        lifetime = moment(this.date_of_birth).format('MMMM Do, YYYY');
+    }
+    lifetime += ' - ';
+    if (this.date_of_death) {
+        lifetime += moment(this.date_of_death).format('MMMM Do, YYYY');
+    }
+    return lifetime;
 });
 
 authorSchema.virtual('author_birth_date_formatted').get(function() {
