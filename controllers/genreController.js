@@ -74,7 +74,7 @@ exports.genre_create_post = [
                     else {
                         genre.save(function(err) {
                             if (err) {return next(err); }
-                            res.redirect(gere.url);
+                            res.redirect(genre.url);
                         });
                     }
                 });
