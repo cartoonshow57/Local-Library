@@ -11,7 +11,17 @@ exports.author_list = function(req, res) {
         .sort([['family_name', 'ascending']])
         .exec(function(err, list_authors) {
             if (err) {return next(err); }
-            res.render('author_list', { title: 'Author List', author_list: list_authors});
+            array = []
+            a = new Set();
+            for (var object in list_authors) {
+                if (a.has(list_authors[object].name)) {
+                    array.push(list_authors[object]);
+                    a.add(list_authors[object].name);
+                } else {
+                    a.add(list_authors[object].name);
+                }
+            }
+            res.render('author_list', { title: 'Author List', author_list: array});
         });
 };
 

@@ -34,7 +34,17 @@ exports.book_list = function(req, res, next) {
         .populate('author')
         .exec(function(err, list_books) {
             if (err) { return next(err); }
-            res.render('book_list', { title: 'Book List', book_list: list_books });
+            array = [];
+            a = new Set();
+            for (var object in list_books) {
+                if (a.has(list_books[object].title)) {
+                    array.push(list_books[object]);
+                    a.add(list_books[object].title);
+                } else {
+                    a.add(list_books[object].title);
+                }
+            }
+            res.render('book_list', { title: 'Book List', book_list: array });
         });
 };
 

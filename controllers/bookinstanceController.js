@@ -10,7 +10,18 @@ exports.bookinstance_list = function(req, res) {
     .populate('book')
     .exec(function (err, list_bookinstances) {
       if (err) { return next(err); }
-      res.render('bookinstance_list', { title: 'Book Instance List', bookinstance_list: list_bookinstances });
+      array = []
+      a = new Set();
+      for (var object in list_bookinstances) {
+        if (a.has(list_bookinstances[object].book.title)) {
+            array.push(list_bookinstances[object]);
+            a.add(list_bookinstances[object].book.title);
+        } else {
+            a.add(list_bookinstances[object].book.title);
+        }
+    }
+    console.log(list_bookinstances);
+      res.render('bookinstance_list', { title: 'Book Instance List', bookinstance_list: array });
     });
 };
 
