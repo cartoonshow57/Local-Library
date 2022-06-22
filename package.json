@@ -11,7 +11,7 @@
     "serverstart": "DEBUG=local-library:* & npm run dev"
   },
   "dependencies": {
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "compress": "^0.99.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
